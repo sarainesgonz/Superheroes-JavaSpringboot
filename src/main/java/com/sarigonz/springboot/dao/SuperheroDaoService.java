@@ -1,5 +1,6 @@
 package com.sarigonz.springboot.dao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -12,12 +13,15 @@ import com.sarigonz.springboot.model.Superhero;
 @Service
 public class SuperheroDaoService {
 // simulación de BD
-    private static List<Superhero> superheroes = Arrays.asList(
+    private static List<Superhero> superheroes = new ArrayList<>( Arrays.asList(
         new Superhero(1, "Bruce Wayne", "Batman", new Date()),
         new Superhero(2, "Bruce Banner", "Hulk", new Date()),
         new Superhero(3, "Peter Parker", "Spiderman", new Date()),
         new Superhero(4, "Logan Howlett", "Wolverine", new Date()),
-        new Superhero(5, "Clark Kent", "Superman", new Date()));
+        new Superhero(5, "Clark Kent", "Superman", new Date())
+    ));
+
+
 
     private static int counter = 5;
 
@@ -28,7 +32,7 @@ public class SuperheroDaoService {
     }
 
 // Get 1 specific superhero
-    public Superhero findOneSuperhero(int id ) {
+    public Superhero findSuperheroById(int id ) {
         Superhero result = null;
 
         for (Superhero superhero : superheroes) {
