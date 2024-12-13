@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.sarigonz.springboot.dao.SuperheroDaoService;
+import com.sarigonz.springboot.exceptions.SuperheroNotFoundException;
 import com.sarigonz.springboot.model.Superhero;
 
 // @RestController(value = "/superhero")
@@ -30,7 +30,11 @@ public class SuperheroController {
 
     @GetMapping("/superhero/{id}")
     public Superhero findSuperheroById(@PathVariable int id) {
-        return superheroDaoService.findSuperheroById(id);
+        Superhero result = superheroDaoService.findSuperheroById(id);
+        if (result == null) {
+            throw new SuperheroNotFoundException("The superhero with id " + id + " was not found.");
+        }
+        return result;
 
     }
 
